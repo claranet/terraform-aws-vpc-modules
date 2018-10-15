@@ -15,6 +15,8 @@ resource "aws_route_table" "default" {
 
   vpc_id           = "${var.vpc_id}"
   propagating_vgws = ["${var.propagating_vgws}"]
+
+  tags = "${var.tags}"
 }
 
 resource "aws_route_table_association" "default" {

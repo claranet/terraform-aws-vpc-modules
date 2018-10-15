@@ -9,6 +9,11 @@ resource "aws_vpc" "vpc" {
   tags                 = "${var.tags}"
 }
 
+resource "aws_default_route_table" "vpc" {
+  default_route_table_id = "${aws_vpc.vpc.default_route_table_id}"
+  tags                   = "${var.tags}"
+}
+
 resource "aws_vpc_dhcp_options" "vpc" {
   domain_name         = "${coalesce(var.domain_name, "${data.aws_region.current.name}.compute.internal")}"
   domain_name_servers = "${var.domain_name_servers}"
