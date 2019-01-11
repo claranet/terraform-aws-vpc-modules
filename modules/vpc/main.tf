@@ -1,6 +1,4 @@
-data "aws_region" "current" {
-  current = true
-}
+data "aws_region" "current" {}
 
 resource "aws_vpc" "vpc" {
   cidr_block           = "${var.cidr_block}"
