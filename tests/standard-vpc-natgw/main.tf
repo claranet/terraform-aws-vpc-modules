@@ -8,7 +8,7 @@ resource "random_id" "name" {
 }
 
 module "vpc" {
-  source = "../../modules/standard-vpc-natgw"
+  source = "../.."
 
   enable_dns_support   = true
   enable_dns_hostnames = true
