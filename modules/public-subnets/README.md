@@ -20,8 +20,8 @@ module "public_subnets" {
   source  = "claranet/vpc-modules/aws//modules/public-subnets"
   version = "0.4.0"
 
-  vpc_id                  = "${module.vpc.vpc_id}"
-  gateway_id              = "${module.vpc.internet_gateway_id}"
+  vpc_id                  = module.vpc.vpc_id
+  gateway_id              = module.vpc.internet_gateway_id
   map_public_ip_on_launch = true
   cidr_block              = "10.112.0.0/20"
   subnet_count            = 3
