@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "../../modules/vpc"
+  source = "./modules/vpc"
 
   cidr_block           = "${var.vpc_cidr_block}"
   enable_dns_support   = "${var.enable_dns_support}"
@@ -9,7 +9,7 @@ module "vpc" {
 }
 
 module "public_subnets" {
-  source = "../../modules/public-subnets"
+  source = "./modules/public-subnets"
 
   vpc_id                  = "${module.vpc.vpc_id}"
   gateway_id              = "${module.vpc.internet_gateway_id}"
@@ -24,7 +24,7 @@ module "public_subnets" {
 }
 
 module "nat_gateways" {
-  source = "../../modules/nat-gateways"
+  source = "./modules/nat-gateways"
 
   subnet_count = "${module.public_subnets.subnet_count}"
   subnet_ids   = "${module.public_subnets.subnet_ids}"
@@ -33,7 +33,7 @@ module "nat_gateways" {
 }
 
 module "private_subnets" {
-  source = "../../modules/private-subnets"
+  source = "./modules/private-subnets"
 
   vpc_id            = "${module.vpc.vpc_id}"
   nat_gateway_count = "${module.nat_gateways.nat_gateway_count}"
