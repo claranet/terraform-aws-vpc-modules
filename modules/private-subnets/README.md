@@ -20,7 +20,7 @@ module "private_subnets" {
   source  = "claranet/vpc-modules/aws//modules/private-subnets"
   version = "0.4.0"
 
-  vpc_id             = "${module.vpc.vpc_id}"
+  vpc_id             = module.vpc.vpc_id
   cidr_block         = "10.112.16.0/20"
   subnet_count       = 3
   availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]

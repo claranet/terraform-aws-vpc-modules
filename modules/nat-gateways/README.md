@@ -22,8 +22,8 @@ module "public_subnets" {
   source  = "claranet/vpc-modules/aws//modules/public-subnets"
   version = "0.4.0"
 
-  vpc_id                  = "${module.vpc.vpc_id}"
-  gateway_id              = "${module.vpc.internet_gateway_id}"
+  vpc_id                  = module.vpc.vpc_id
+  gateway_id              = module.vpc.internet_gateway_id
   map_public_ip_on_launch = true
   cidr_block              = "10.112.0.0/20"
   subnet_count            = 3
@@ -36,8 +36,8 @@ module "nat_gateways" {
   source  = "claranet/vpc-modules/aws//modules/nat-gateways"
   version = "0.4.0"
 
-  subnet_count = "${module.public_subnets.subnet_count}"
-  subnet_ids   = "${module.public_subnets.subnet_ids}"
+  subnet_count = module.public_subnets.subnet_count
+  subnet_ids   = module.public_subnets.subnet_ids
 }
 
 # Use NAT Gateways in private subnets to provide internet access
@@ -46,9 +46,9 @@ module "private_subnets" {
   source  = "claranet/vpc-modules/aws//modules/private-subnets"
   version = "0.4.0"
 
-  vpc_id             = "${module.vpc.vpc_id}"
-  nat_gateway_count  = "${module.nat_gateways.nat_gateway_count}"
-  nat_gateway_ids    = "${module.nat_gateways.nat_gateway_ids}"
+  vpc_id             = module.vpc.vpc_id
+  nat_gateway_count  = module.nat_gateways.nat_gateway_count
+  nat_gateway_ids    = module.nat_gateways.nat_gateway_ids
   cidr_block         = "10.112.16.0/20"
   subnet_count       = 3
   availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]

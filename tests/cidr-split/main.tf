@@ -12,8 +12,8 @@ module "vpc" {
 
   cidr_block = "10.0.0.0/16"
 
-  tags {
-    Name = "${random_id.name.hex}"
+  tags = {
+    Name = random_id.name.hex
   }
 }
 
@@ -22,14 +22,14 @@ module "vpc" {
 module "subnets1" {
   source = "../../modules/private-subnets"
 
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc_id = module.vpc.vpc_id
 
   cidr_block         = "10.0.0.0/20"
   subnet_count       = 1
   availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 
-  tags {
-    Name = "${random_id.name.hex}"
+  tags = {
+    Name = random_id.name.hex
   }
 }
 
@@ -38,14 +38,14 @@ module "subnets1" {
 module "subnets2" {
   source = "../../modules/private-subnets"
 
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc_id = module.vpc.vpc_id
 
   cidr_block         = "10.0.16.0/20"
   subnet_count       = 2
   availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 
-  tags {
-    Name = "${random_id.name.hex}"
+  tags = {
+    Name = random_id.name.hex
   }
 }
 
@@ -55,14 +55,14 @@ module "subnets2" {
 module "subnets3" {
   source = "../../modules/private-subnets"
 
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc_id = module.vpc.vpc_id
 
   cidr_block         = "10.0.32.0/20"
   subnet_count       = 3
   availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 
-  tags {
-    Name = "${random_id.name.hex}"
+  tags = {
+    Name = random_id.name.hex
   }
 }
 
@@ -72,13 +72,13 @@ module "subnets3" {
 module "subnets4" {
   source = "../../modules/private-subnets"
 
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc_id = module.vpc.vpc_id
 
   cidr_block         = "10.0.48.0/20"
   subnet_count       = 4
   availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 
-  tags {
-    Name = "${random_id.name.hex}"
+  tags = {
+    Name = random_id.name.hex
   }
 }

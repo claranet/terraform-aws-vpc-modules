@@ -6,6 +6,13 @@ By default it creates a traditional public/private subnet structure and NAT Gate
 
 However, it also includes [submodules](./modules/) to help with creating any kind of VPC and subnet design. These [submodules](./modules/) were designed to be composable and flexible and have their own documentation.
 
+## Terraform version compatibility
+
+| Module version | Terraform version |
+|----------------|-------------------|
+| 1.x.x          | 0.12.x            |
+| 0.x.x          | 0.11.x            |
+
 ## Usage
 
 This creates a VPC with public and private subnets and NAT Gateways.

@@ -2,12 +2,12 @@
 
 variable "availability_zones" {
   description = "A list of availability zones to create subnets in"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "tags" {
   description = "A map of tags to assign to resources"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
@@ -15,18 +15,18 @@ variable "tags" {
 
 variable "vpc_cidr_block" {
   description = "The CIDR block for the VPC"
-  type        = "string"
+  type        = string
 }
 
 variable "enable_dns_support" {
   description = "Enable DNS support in the VPC"
-  type        = "string"
+  type        = string
   default     = true
 }
 
 variable "enable_dns_hostnames" {
   description = "Enable DNS hostnames in the VPC"
-  type        = "string"
+  type        = string
   default     = false
 }
 
@@ -37,7 +37,7 @@ variable "domain_name" {
 
 variable "domain_name_servers" {
   description = "List of name servers to configure in /etc/resolve.conf, defaults to the default AWS nameservers"
-  type        = "list"
+  type        = list(string)
 
   default = [
     "AmazonProvidedDNS",
@@ -48,23 +48,23 @@ variable "domain_name_servers" {
 
 variable "public_cidr_block" {
   description = "The larger CIDR block to use for calculating individual public subnet CIDR blocks"
-  type        = "string"
+  type        = string
 }
 
 variable "public_subnet_count" {
   description = "The number of public subnets to create"
-  type        = "string"
+  type        = string
 }
 
 variable "public_propagating_vgws" {
   description = "A list of virtual gateways for route propagation in the public subnets"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "map_public_ip_on_launch" {
   description = "Assign a public IP address to instances launched into the public subnets"
-  type        = "string"
+  type        = string
   default     = false
 }
 
@@ -72,16 +72,16 @@ variable "map_public_ip_on_launch" {
 
 variable "private_cidr_block" {
   description = "The larger CIDR block to use for calculating individual private subnet CIDR blocks"
-  type        = "string"
+  type        = string
 }
 
 variable "private_subnet_count" {
   description = "The number of private subnets to create"
-  type        = "string"
+  type        = string
 }
 
 variable "private_propagating_vgws" {
   description = "A list of virtual gateways for route propagation in the private subnets"
-  type        = "list"
+  type        = list(string)
   default     = []
 }

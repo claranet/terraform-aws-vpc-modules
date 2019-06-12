@@ -23,7 +23,7 @@ module "vpc" {
   private_cidr_block   = "10.112.16.0/20"
   private_subnet_count = 3
 
-  tags {
-    Name = "${random_id.name.hex}"
+  tags = {
+    Name = random_id.name.hex
   }
 }
