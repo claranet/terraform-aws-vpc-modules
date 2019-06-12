@@ -4,6 +4,29 @@ Creates private subnets and route tables in a VPC, optionally using NAT Gateways
 
 This module takes a single CIDR block and calculates the CIDR blocks to use for the subnets being created.
 
+## Usage
+
+```hcl
+module "vpc" {
+  source  = "claranet/vpc-modules/aws"
+  version = "0.4.0"
+
+  cidr_block           = "10.112.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+}
+
+module "private_subnets" {
+  source  = "claranet/vpc-modules/aws//modules/private-subnets"
+  version = "0.4.0"
+
+  vpc_id             = "${module.vpc.vpc_id}"
+  cidr_block         = "10.112.16.0/20"
+  subnet_count       = 3
+  availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+}
+```
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |

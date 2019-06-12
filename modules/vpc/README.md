@@ -2,6 +2,19 @@
 
 Creates a VPC, Internet Gateway, and DHCP options.
 
+## Usage
+
+```hcl
+module "vpc" {
+  source  = "claranet/vpc-modules/aws//modules/vpc"
+  version = "0.4.0"
+
+  cidr_block           = "10.112.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+}
+```
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |

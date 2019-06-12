@@ -4,6 +4,10 @@ Creates subnets in a VPC.
 
 This module takes a single CIDR block and calculates the CIDR blocks to use for the subnets being created.
 
+## Usage
+
+This is a lower level module. Consider using the [private-subnets](../private-subnets) or [public-subnets](../public-subnets) modules instead.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |

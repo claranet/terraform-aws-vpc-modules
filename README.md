@@ -2,6 +2,64 @@
 
 This is a collection of Terraform modules for AWS VPC management.
 
-It includes a [standard-vpc-natgw](./modules/standard-vpc-natgw) module with a traditional public/private subnet structure and NAT Gateways, which should be suitable for many projects. It also includes smaller modules to help with creating less traditional VPCs. The [standard-vpc-natgw](./modules/standard-vpc-natgw) module shows how the smaller modules can be used together to set up a VPC.
+By default it creates a traditional public/private subnet structure and NAT Gateways, which should be suitable for many projects.
 
-The individual [modules](./modules/) have their own documentation.
+However, it also includes [submodules](./modules/) to help with creating any kind of VPC and subnet design. These [submodules](./modules/) were designed to be composable and flexible and have their own documentation.
+
+## Usage
+
+This creates a VPC with public and private subnets and NAT Gateways.
+
+This module takes CIDR blocks for public and private subnets, and the number of subnets to create within the CIDR blocks, and calculates the CIDR blocks to use for the subnets being created.
+
+```hcl
+module "vpc" {
+  source  = "claranet/vpc-modules/aws"
+  version = "0.4.0"
+
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+
+  availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+
+  vpc_cidr_block = "10.112.0.0/16"
+
+  public_cidr_block   = "10.112.0.0/20"
+  public_subnet_count = 3
+
+  private_cidr_block   = "10.112.16.0/20"
+  private_subnet_count = 3
+}
+```
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| availability_zones | A list of availability zones to create subnets in | list | - | yes |
+| domain_name | The suffix domain to use by default when resolving non Full Qualified Domain Names, if left blank then <region>.compute.internal will be used | string | `` | no |
+| domain_name_servers | List of name servers to configure in /etc/resolve.conf, defaults to the default AWS nameservers | list | `<list>` | no |
+| enable_dns_hostnames | Enable DNS hostnames in the VPC | string | `false` | no |
+| enable_dns_support | Enable DNS support in the VPC | string | `true` | no |
+| map_public_ip_on_launch | Assign a public IP address to instances launched into the public subnets | string | `false` | no |
+| private_cidr_block | The larger CIDR block to use for calculating individual private subnet CIDR blocks | string | - | yes |
+| private_propagating_vgws | A list of virtual gateways for route propagation in the private subnets | list | `<list>` | no |
+| private_subnet_count | The number of private subnets to create | string | - | yes |
+| public_cidr_block | The larger CIDR block to use for calculating individual public subnet CIDR blocks | string | - | yes |
+| public_propagating_vgws | A list of virtual gateways for route propagation in the public subnets | list | `<list>` | no |
+| public_subnet_count | The number of public subnets to create | string | - | yes |
+| tags | A map of tags to assign to resources | map | `<map>` | no |
+| vpc_cidr_block | The CIDR block for the VPC | string | - | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| internet_gateway_id | The Internet Gateway ID |
+| private_route_table_ids | List of private route table IDs |
+| private_subnet_count | The number of private subnets |
+| private_subnet_ids | List of private subnet IDs |
+| public_route_table_ids | List of public route table IDs |
+| public_subnet_count | The number of public subnets |
+| public_subnet_ids | List of public subnet IDs |
+| vpc_id | The VPC ID |
