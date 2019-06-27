@@ -68,4 +68,5 @@ module "private_subnets" {
 | Name | Description |
 |------|-------------|
 | nat_gateway_count | The number of gateways |
+| nat_gateway_public_ips | The public EIPs of the Nat Gateways
 | nat_gateway_ids | List of gateway IDs |
