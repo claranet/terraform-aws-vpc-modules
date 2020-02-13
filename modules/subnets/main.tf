@@ -7,7 +7,7 @@ resource "aws_subnet" "subnets" {
 
   map_public_ip_on_launch = var.map_public_ip_on_launch
 
-  tags = var.tags
+  tags = merge(var.tags, lookup(var.tags_for_resource, "aws_subnet", {}))
 }
 
 resource "aws_route_table" "default" {
@@ -16,7 +16,7 @@ resource "aws_route_table" "default" {
   vpc_id           = var.vpc_id
   propagating_vgws = var.propagating_vgws
 
-  tags = var.tags
+  tags = merge(var.tags, lookup(var.tags_for_resource, "aws_route_table", {}))
 }
 
 resource "aws_route_table_association" "default" {

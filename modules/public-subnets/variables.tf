@@ -32,6 +32,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "tags_for_resource" {
+  description = "A nested map of tags to assign to specific resource types"
+  type        = map(map(string))
+  default     = {}
+}
+
 # Public subnet variables
 
 variable "map_public_ip_on_launch" {

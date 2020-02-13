@@ -5,7 +5,8 @@ module "vpc" {
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
 
-  tags = var.tags
+  tags              = var.tags
+  tags_for_resource = var.tags_for_resource
 }
 
 module "public_subnets" {
@@ -20,7 +21,8 @@ module "public_subnets" {
   subnet_count       = var.public_subnet_count
   availability_zones = var.availability_zones
 
-  tags = var.tags
+  tags              = var.tags
+  tags_for_resource = var.tags_for_resource
 }
 
 module "nat_gateways" {
@@ -29,7 +31,8 @@ module "nat_gateways" {
   subnet_count = module.public_subnets.subnet_count
   subnet_ids   = module.public_subnets.subnet_ids
 
-  tags = var.tags
+  tags              = var.tags
+  tags_for_resource = var.tags_for_resource
 }
 
 module "private_subnets" {
@@ -44,5 +47,6 @@ module "private_subnets" {
   subnet_count       = var.private_subnet_count
   availability_zones = var.availability_zones
 
-  tags = var.tags
+  tags              = var.tags
+  tags_for_resource = var.tags_for_resource
 }

@@ -34,10 +34,11 @@ module "private_subnets" {
 | availability_zones | A list of availability zones to create the subnets in | list | - | yes |
 | cidr_block | The larger CIDR block to use for calculating individual subnet CIDR blocks | string | - | yes |
 | nat_gateway_count | The number of NAT gateways to use for routing, must match subnet_count and nat_gateway_ids | string | `0` | no |
-| nat_gateway_ids | A list of NAT Gateway IDs to use for routing | string | `<list>` | no |
-| propagating_vgws | A list of virtual gateways for route propagation | list | `<list>` | no |
+| nat_gateway_ids | A list of NAT Gateway IDs to use for routing | string | - | no |
+| propagating_vgws | A list of virtual gateways for route propagation | list | - | no |
 | subnet_count | The number of subnets to create | string | - | yes |
-| tags | A map of tags to assign to resources | map | `<map>` | no |
+| tags | A map of tags to assign to resources | map | - | no |
+| tags_for_resource | A nested map of tags to assign to specific resource types | map | - | no |
 | vpc_id | The ID of the VPC to create the subnets in | string | - | yes |
 
 ## Outputs

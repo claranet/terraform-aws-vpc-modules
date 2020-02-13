@@ -9,5 +9,5 @@ resource "aws_nat_gateway" "natgw" {
 
   allocation_id = element(aws_eip.natgw.*.id, count.index)
   subnet_id     = element(var.subnet_ids, count.index)
-  tags          = var.tags
+  tags          = merge(var.tags, lookup(var.tags_for_resource, "aws_nat_gateway", {}))
 }
