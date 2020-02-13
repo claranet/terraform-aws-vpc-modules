@@ -36,6 +36,23 @@ module "vpc" {
 
   private_cidr_block   = "10.112.16.0/20"
   private_subnet_count = 3
+
+  # Tags for all resources that support them.
+  tags = {
+    Name = "my-vpc"
+  }
+
+  # Override tags for specific resource types.
+  tags_for_resource = {
+    aws_vpc = {
+      "Name"                             = "my-vpc"
+      "kubernetes.io/cluster/my-cluster" = "shared"
+    }
+    aws_subnet = {
+      "Name"                             = "my-vpc"
+      "kubernetes.io/cluster/my-cluster" = "shared"
+    }
+  }
 }
 ```
 
@@ -44,18 +61,19 @@ module "vpc" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | availability_zones | A list of availability zones to create subnets in | list | - | yes |
-| domain_name | The suffix domain to use by default when resolving non Full Qualified Domain Names, if left blank then <region>.compute.internal will be used | string | `` | no |
-| domain_name_servers | List of name servers to configure in /etc/resolve.conf, defaults to the default AWS nameservers | list | `<list>` | no |
+| domain_name | The suffix domain to use by default when resolving non Full Qualified Domain Names, if left blank then <region>.compute.internal will be used | string | - | no |
+| domain_name_servers | List of name servers to configure in /etc/resolve.conf, defaults to the default AWS nameservers | list | `AmazonProvidedDNS` | no |
 | enable_dns_hostnames | Enable DNS hostnames in the VPC | string | `false` | no |
 | enable_dns_support | Enable DNS support in the VPC | string | `true` | no |
 | map_public_ip_on_launch | Assign a public IP address to instances launched into the public subnets | string | `false` | no |
 | private_cidr_block | The larger CIDR block to use for calculating individual private subnet CIDR blocks | string | - | yes |
-| private_propagating_vgws | A list of virtual gateways for route propagation in the private subnets | list | `<list>` | no |
+| private_propagating_vgws | A list of virtual gateways for route propagation in the private subnets | list | - | no |
 | private_subnet_count | The number of private subnets to create | string | - | yes |
 | public_cidr_block | The larger CIDR block to use for calculating individual public subnet CIDR blocks | string | - | yes |
-| public_propagating_vgws | A list of virtual gateways for route propagation in the public subnets | list | `<list>` | no |
+| public_propagating_vgws | A list of virtual gateways for route propagation in the public subnets | list | - | no |
 | public_subnet_count | The number of public subnets to create | string | - | yes |
-| tags | A map of tags to assign to resources | map | `<map>` | no |
+| tags | A map of tags to assign to resources | map | - | no |
+| tags_for_resource | A nested map of tags to assign to specific resource types | map | - | no |
 | vpc_cidr_block | The CIDR block for the VPC | string | - | yes |
 
 ## Outputs

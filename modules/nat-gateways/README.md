@@ -61,7 +61,8 @@ module "private_subnets" {
 |------|-------------|:----:|:-----:|:-----:|
 | subnet_count | The number of subnets to create gateways in, must match length of subnet_ids | string | - | yes |
 | subnet_ids | A list of subnets to create gateways in | list | - | yes |
-| tags | A map of tags to assign to resources | map | `<map>` | no |
+| tags | A map of tags to assign to resources | map | - | no |
+| tags_for_resource | A nested map of tags to assign to specific resource types | map | - | no |
 
 ## Outputs
 

@@ -7,6 +7,7 @@ module "subnets" {
   availability_zones = var.availability_zones
   propagating_vgws   = var.propagating_vgws
   tags               = var.tags
+  tags_for_resource  = var.tags_for_resource
 
   map_public_ip_on_launch = var.map_public_ip_on_launch
 }

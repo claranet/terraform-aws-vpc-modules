@@ -13,3 +13,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "tags_for_resource" {
+  description = "A nested map of tags to assign to specific resource types"
+  type        = map(map(string))
+  default     = {}
+}
