@@ -24,6 +24,12 @@ variable "vpc_cidr_block" {
   type        = string
 }
 
+variable "enable_dhcp_options" {
+  description = "Enable creation of DHCP Options"
+  type        = bool
+  default     = true
+}
+
 variable "enable_dns_support" {
   description = "Enable DNS support in the VPC"
   type        = string

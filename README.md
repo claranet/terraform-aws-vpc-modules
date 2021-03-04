@@ -63,6 +63,7 @@ module "vpc" {
 | availability_zones | A list of availability zones to create subnets in | list | - | yes |
 | domain_name | The suffix domain to use by default when resolving non Full Qualified Domain Names, if left blank then <region>.compute.internal will be used | string | - | no |
 | domain_name_servers | List of name servers to configure in /etc/resolve.conf, defaults to the default AWS nameservers | list | `AmazonProvidedDNS` | no |
+| enable_dhcp_options | Enable creation of DHCP Options | string | `true` | no |
 | enable_dns_hostnames | Enable DNS hostnames in the VPC | string | `false` | no |
 | enable_dns_support | Enable DNS support in the VPC | string | `true` | no |
 | map_public_ip_on_launch | Assign a public IP address to instances launched into the public subnets | string | `false` | no |

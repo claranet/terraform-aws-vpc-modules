@@ -13,6 +13,8 @@ resource "aws_default_route_table" "vpc" {
 }
 
 resource "aws_vpc_dhcp_options" "vpc" {
+  count = var.enable_dhcp_options == true ? 1 : 0
+
   domain_name = coalesce(
     var.domain_name,
     "${data.aws_region.current.name}.compute.internal",
@@ -22,8 +24,9 @@ resource "aws_vpc_dhcp_options" "vpc" {
 }
 
 resource "aws_vpc_dhcp_options_association" "vpc_dhcp" {
+  count           = var.enable_dhcp_options == true ? 1 : 0
   vpc_id          = aws_vpc.vpc.id
-  dhcp_options_id = aws_vpc_dhcp_options.vpc.id
+  dhcp_options_id = aws_vpc_dhcp_options.vpc[0].id
 }
 
 resource "aws_internet_gateway" "igw" {
