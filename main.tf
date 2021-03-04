@@ -2,6 +2,7 @@ module "vpc" {
   source = "./modules/vpc"
 
   cidr_block           = var.vpc_cidr_block
+  enable_dhcp_options  = var.enable_dhcp_options
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
 
